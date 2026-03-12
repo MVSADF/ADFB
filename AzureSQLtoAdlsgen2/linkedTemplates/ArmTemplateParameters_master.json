@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "AzureSQLtoAdlsgen2"
+		},
+		"LS_ADLSGen2_properties_typeProperties_url": {
+			"value": "https://onpremsqlservtoadlsgen2.dfs.core.windows.net"
+		},
+		"LS_AzureSqldatabase_properties_typeProperties_connectionString_secretName": {
+			"value": "AzureSqldatabase"
+		},
+		"LS_AzureSynapseAnalytics1_properties_typeProperties_server": {
+			"value": "onpremsqlserver.database.windows.net"
+		},
+		"LS_AzureSynapseAnalytics1_properties_typeProperties_database": {
+			"value": "dedicatedsqlpoolDW"
+		},
+		"LS_AzureSynapseAnalytics1_properties_typeProperties_userName": {
+			"value": "mahesh"
+		},
+		"LS_keyvault_properties_typeProperties_baseUrl": {
+			"value": "https://AzuresqltoAdlsgen2.vault.azure.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

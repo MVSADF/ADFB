@@ -1,0 +1,17 @@
+{
+	"name": "DS_Final_DW",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureSqldatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Dimcust"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

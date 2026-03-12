@@ -1,0 +1,9 @@
+{
+	"name": "AzureSQLtoAdlsgen2",
+	"location": "westus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "71de11e2-ae59-4688-99bb-48bce15df72b",
+		"tenantId": "28797fba-ffe2-4fb9-854b-5d600d126193"
+	}
+}

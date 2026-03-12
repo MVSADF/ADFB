@@ -1,0 +1,24 @@
+{
+	"name": "LS_AzureSynapseAnalytics1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDW",
+		"typeProperties": {
+			"server": "onpremsqlserver.database.windows.net",
+			"database": "dedicatedsqlpoolDW",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "mahesh",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "LS_keyvault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "synapseKey"
+			}
+		}
+	}
+}

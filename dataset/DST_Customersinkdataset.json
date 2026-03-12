@@ -1,0 +1,32 @@
+{
+	"name": "DST_Customersinkdataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sinksilverdate": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "cust/@{formatDateTime(dataset().sinksilverdate,'yyyy')}/@{formatDateTime(dataset().sinksilverdate,'MM')}/@{formatDateTime(dataset().sinksilverdate,'dd')}",
+					"type": "Expression"
+				},
+				"fileSystem": "silver"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

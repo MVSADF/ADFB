@@ -1,0 +1,17 @@
+{
+	"name": "DS_AzureSynapseAnalyticsTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AzureSynapseAnalytics1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "dimcust"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

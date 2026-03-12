@@ -1,0 +1,46 @@
+{
+	"name": "DS_sink_emp_silver",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLSGen2",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Sinkempdate": {
+				"type": "string",
+				"defaultValue": "2026-03-12"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": {
+					"value": "@concat(\n  'emp/',\n  formatDateTime(dataset().Sinkempdate,'yyyy'), '/',\n  formatDateTime(dataset().Sinkempdate,'MM'), '/',\n  formatDateTime(dataset().Sinkempdate,'dd')\n)",
+					"type": "Expression"
+				},
+				"fileSystem": "silver"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "cid",
+				"type": "String"
+			},
+			{
+				"name": "cname",
+				"type": "String"
+			},
+			{
+				"name": "clocation",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

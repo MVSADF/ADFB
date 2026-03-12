@@ -1,0 +1,79 @@
+{
+	"name": "dataflow_cust",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_ADLSgen2_bronzedataset",
+						"type": "DatasetReference"
+					},
+					"name": "SRCCUSTDATA"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DST_Customersinkdataset",
+						"type": "DatasetReference"
+					},
+					"name": "filtereddatatosink",
+					"rejectedDataLinkedService": {
+						"referenceName": "LS_ADLSGen2",
+						"type": "LinkedServiceReference"
+					}
+				}
+			],
+			"transformations": [
+				{
+					"name": "identifyingduplicatesusingrownumber"
+				},
+				{
+					"name": "Filterrecords"
+				},
+				{
+					"name": "selectrequiredcolumns"
+				}
+			],
+			"scriptLines": [
+				"parameters{",
+				"     df_Parameter as string",
+				"}",
+				"source(output(",
+				"          cid as integer,",
+				"          cname as string,",
+				"          clocation as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> SRCCUSTDATA",
+				"SRCCUSTDATA window(over(cid,",
+				"          cname,",
+				"          clocation),",
+				"     asc(cid, true),",
+				"     Row_number = rowNumber(),",
+				"     partitionBy('hash', 1)) ~> identifyingduplicatesusingrownumber",
+				"identifyingduplicatesusingrownumber filter(equals(Row_number,1),",
+				"     partitionBy('hash', 1)) ~> Filterrecords",
+				"Filterrecords select(mapColumn(",
+				"          cid,",
+				"          cname,",
+				"          clocation",
+				"     ),",
+				"     partitionBy('hash', 1),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectrequiredcolumns",
+				"selectrequiredcolumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> filtereddatatosink"
+			]
+		}
+	}
+}
